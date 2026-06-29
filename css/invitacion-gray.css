@@ -595,11 +595,20 @@ body.invitation-page .giftclick-footer p {
   line-height: 1.5;
 }
 
+body.invitation-page .giftclick-footer .made-with {
+  color: var(--inv-muted);
+  font-size: 0.92rem;
+}
+
+body.invitation-page .heartfooter {
+  color: var(--inv-gold-strong);
+}
+
 body.invitation-page .giftclick-brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 12px;
+  padding: 6px 12px;
   border-radius: 999px;
   border: 1px solid rgba(212, 175, 55, 0.22);
   background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), rgba(255, 255, 255, 0.04));
@@ -608,44 +617,10 @@ body.invitation-page .giftclick-brand {
   box-shadow: none;
 }
 
-body.invitation-page .giftclick-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: inline-grid;
-  place-items: center;
-  background: linear-gradient(135deg, #f4d87a, #d4af37 52%, #7b5a12);
-  color: #121212;
-  font-family: "Fraunces", serif;
-  font-size: 0.88rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-}
-
-body.invitation-page .giftclick-word {
-  font-family: "Fraunces", serif;
-  color: var(--inv-gold-strong);
-  font-size: 1.2rem;
-  letter-spacing: 0.02em;
-}
-
-body.invitation-page .giftclick-contact {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 38px;
-  padding: 0 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--inv-text);
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: none;
-}
-
-body.invitation-page .giftclick-contact i {
-  color: var(--inv-gold-strong);
+body.invitation-page .giftclick-logo {
+  display: block;
+  width: min(190px, 68vw);
+  height: auto;
 }
 
 body.invitation-page .back-wrap {
@@ -984,13 +959,8 @@ body.invitation-page .cover-date {
     font-size: 1.08rem;
   }
 
-  body.invitation-page .giftclick-word {
-    font-size: 1.36rem;
-  }
-
-  body.invitation-page .giftclick-contact {
-    min-height: 42px;
-    font-size: 1.1rem;
+  body.invitation-page .giftclick-footer .made-with {
+    font-size: 1.06rem;
   }
 }
 
