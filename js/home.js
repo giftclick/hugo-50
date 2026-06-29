@@ -90,13 +90,53 @@
         const audio = new Audio(source);
         audio.preload = 'auto';
         let lastSavedAt = 0;
+        let restorePositionPromise = null;
+        const musicQueryKeys = {
+            accepted: 'gc_music',
+            playing: 'gc_music_playing',
+            time: 'gc_music_time',
+            updatedAt: 'gc_music_updated'
+        };
 
-        const readMusicState = () => {
+        const readStoredMusicState = () => {
             try {
                 return JSON.parse(window.localStorage.getItem(musicStorageKey) || '{}') || {};
             } catch (error) {
                 return {};
             }
+        };
+
+        const readUrlMusicState = () => {
+            const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+            const searchParams = new URLSearchParams(window.location.search);
+            const params = hashParams.has(musicQueryKeys.time)
+                || hashParams.has(musicQueryKeys.playing)
+                || hashParams.has(musicQueryKeys.accepted)
+                ? hashParams
+                : searchParams;
+            const hasMusicState = params.has(musicQueryKeys.time)
+                || params.has(musicQueryKeys.playing)
+                || params.has(musicQueryKeys.accepted);
+            if (!hasMusicState) return null;
+
+            const currentTime = Number(params.get(musicQueryKeys.time));
+            const updatedAt = Number(params.get(musicQueryKeys.updatedAt));
+            const acceptedValue = params.get(musicQueryKeys.accepted);
+
+            return {
+                accepted: acceptedValue === '1',
+                rejected: acceptedValue === '0',
+                playing: params.get(musicQueryKeys.playing) === '1',
+                currentTime: Number.isFinite(currentTime) && currentTime > 0 ? currentTime : 0,
+                updatedAt: Number.isFinite(updatedAt) ? updatedAt : Date.now(),
+                source
+            };
+        };
+
+        const readMusicState = () => {
+            const stored = readStoredMusicState();
+            const fromUrl = readUrlMusicState();
+            return fromUrl ? Object.assign({}, stored, fromUrl) : stored;
         };
 
         const writeMusicState = (patch = {}) => {
@@ -127,18 +167,24 @@
             if (timeDisplay) timeDisplay.textContent = formatTime(audio.currentTime);
         };
 
-        const savePlaybackState = (isPlaying = !audio.paused, force = false) => {
-            const now = Date.now();
-            if (!force && now - lastSavedAt < 800) return;
-            lastSavedAt = now;
+        const createPlaybackSnapshot = (isPlaying = !audio.paused) => {
             const state = readMusicState();
-            writeMusicState({
+            return {
                 accepted: state.accepted === true,
                 rejected: state.rejected === true,
                 playing: isPlaying,
                 currentTime: Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
                 duration: Number.isFinite(audio.duration) ? audio.duration : 0
-            });
+            };
+        };
+
+        const savePlaybackState = (isPlaying = !audio.paused, force = false) => {
+            const now = Date.now();
+            const snapshot = createPlaybackSnapshot(isPlaying);
+            if (!force && now - lastSavedAt < 800) return snapshot;
+            lastSavedAt = now;
+            writeMusicState(snapshot);
+            return snapshot;
         };
 
         const getResumeTime = () => {
@@ -172,11 +218,14 @@
                 return Promise.resolve();
             }
 
-            return new Promise((resolve) => {
+            if (restorePositionPromise) return restorePositionPromise;
+
+            restorePositionPromise = new Promise((resolve) => {
                 const done = () => {
                     audio.removeEventListener('loadedmetadata', done);
                     audio.removeEventListener('error', done);
                     applyPosition();
+                    restorePositionPromise = null;
                     resolve();
                 };
 
@@ -184,6 +233,8 @@
                 audio.addEventListener('error', done, { once: true });
                 audio.load();
             });
+
+            return restorePositionPromise;
         };
 
         const playMusic = (rememberChoice = true) => {
@@ -287,13 +338,26 @@
             });
         }
 
+        const appendMusicSnapshotToUrl = (url, snapshot) => {
+            const hashParams = new URLSearchParams(url.hash.replace(/^#/, ''));
+            hashParams.set(musicQueryKeys.accepted, snapshot.accepted ? '1' : '0');
+            hashParams.set(musicQueryKeys.playing, snapshot.playing ? '1' : '0');
+            hashParams.set(musicQueryKeys.time, String(Math.max(0, snapshot.currentTime).toFixed(3)));
+            hashParams.set(musicQueryKeys.updatedAt, String(Date.now()));
+            url.hash = hashParams.toString();
+            return url;
+        };
+
         const saveBeforeInternalNavigation = (event) => {
             const link = event.target.closest && event.target.closest('a[href]');
             if (!link) return;
             try {
                 const url = new URL(link.getAttribute('href'), window.location.href);
                 if (url.origin === window.location.origin && /(?:index|home)\.html$/i.test(url.pathname)) {
-                    savePlaybackState(!audio.paused, true);
+                    const snapshot = savePlaybackState(!audio.paused, true);
+                    appendMusicSnapshotToUrl(url, snapshot);
+                    const targetName = url.pathname.split('/').pop() || 'index.html';
+                    link.setAttribute('href', targetName + url.search + url.hash);
                 }
             } catch (error) {
                 // Ignore malformed links.
@@ -309,6 +373,9 @@
         document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'hidden') savePlaybackState(!audio.paused, true);
         });
+
+        const urlMusicState = readUrlMusicState();
+        if (urlMusicState) writeMusicState(urlMusicState);
 
         restoreSavedPosition().then(updateProgress);
         updateProgress();
