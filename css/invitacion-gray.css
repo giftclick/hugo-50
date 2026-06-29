@@ -1,0 +1,1084 @@
+:root {
+  --inv-bg-0: #0c0d10;
+  --inv-bg-1: #14171b;
+  --inv-bg-2: #1d2127;
+  --inv-surface: rgba(255, 255, 255, 0.06);
+  --inv-surface-strong: rgba(255, 255, 255, 0.1);
+  --inv-line: rgba(255, 255, 255, 0.12);
+  --inv-text: #f4f5f7;
+  --inv-muted: #c0c5cc;
+  --inv-muted-2: #8d939b;
+  --inv-gold: #d4af37;
+  --inv-gold-soft: rgba(212, 175, 55, 0.16);
+  --inv-gold-strong: #f4d87a;
+  --inv-accent: #d7dbe0;
+  --inv-accent-strong: #ffffff;
+  --inv-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+  --inv-radius-xl: 30px;
+  --inv-radius-lg: 24px;
+  --inv-radius-md: 18px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--inv-bg-0);
+  overflow-x: clip;
+}
+
+body.invitation-page {
+  margin: 0;
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  max-width: none !important;
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 42%),
+    linear-gradient(180deg, var(--inv-bg-1) 0%, #111419 40%, var(--inv-bg-0) 100%);
+  color: var(--inv-text);
+  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+}
+
+body.invitation-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.35;
+  mix-blend-mode: soft-light;
+}
+
+body.invitation-page #content {
+  display: block;
+  width: 100%;
+  max-width: none !important;
+  min-height: 100vh;
+  margin: 0 !important;
+  padding: clamp(18px, 3.5vw, 42px) 0 calc(170px + env(safe-area-inset-bottom, 0px)) !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box;
+}
+
+body.invitation-page .page-shell {
+  width: min(100%, 430px);
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+body.invitation-page .hero-card,
+body.invitation-page .card,
+body.invitation-page .pass-card,
+body.invitation-page .timeline-card,
+body.invitation-page .resource-card,
+body.invitation-page .footer-card {
+  width: 100%;
+  min-width: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--inv-line);
+  border-radius: var(--inv-radius-xl);
+  box-shadow: var(--inv-shadow), 0 0 0 1px rgba(212, 175, 55, 0.04);
+  backdrop-filter: blur(18px);
+}
+
+body.invitation-page .hero-card {
+  padding: clamp(24px, 5vw, 40px);
+  text-align: center;
+  overflow: hidden;
+}
+
+body.invitation-page .card,
+body.invitation-page .pass-card,
+body.invitation-page .timeline-card,
+body.invitation-page .resource-card,
+body.invitation-page .footer-card {
+  padding: clamp(20px, 4vw, 28px);
+}
+
+body.invitation-page .stack {
+  display: grid;
+  gap: 18px;
+}
+
+body.invitation-page .brand-line {
+  margin: 0 0 14px;
+  color: var(--inv-gold-strong);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+body.invitation-page .hero-name,
+body.invitation-page .story-title,
+body.invitation-page .section-title,
+body.invitation-page .closing-title,
+body.invitation-page .date-line,
+body.invitation-page .time-line {
+  font-family: "Fraunces", "DM Sans", serif;
+}
+
+body.invitation-page .hero-name {
+  margin: 0;
+  font-family: "Herr Von Muellerhoff", "Brush Script MT", cursive;
+  font-size: clamp(3rem, 10vw, 5.4rem);
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+body.invitation-page .hero-copy {
+  margin: 18px auto 0;
+  max-width: 44rem;
+  color: var(--inv-muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+body.invitation-page .hero-number {
+  display: block;
+  width: min(100%, 310px);
+  margin: 18px auto 10px;
+  filter: drop-shadow(0 24px 45px rgba(0, 0, 0, 0.38)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.14));
+  object-fit: contain;
+}
+
+body.invitation-page .hero-tag {
+  margin: 0;
+  font-family: "Cinzel", "Fraunces", serif;
+  color: var(--inv-gold-strong);
+  font-size: clamp(0.86rem, 2.2vw, 1.05rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+body.invitation-page .pass-card {
+  margin-top: 20px;
+  text-align: center;
+}
+
+body.invitation-page .section-title {
+  margin: 0;
+  color: var(--inv-gold-strong);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+body.invitation-page #name {
+  margin: 14px 0 8px;
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.6rem, 4.8vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--inv-text);
+}
+
+body.invitation-page .reserved-line {
+  margin: 0;
+  color: var(--inv-muted);
+  font-size: 1.08rem;
+}
+
+body.invitation-page #reserved-phrase {
+  color: var(--inv-gold-strong);
+  font-weight: 700;
+}
+
+body.invitation-page #passnumbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  margin: 18px 0 12px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.16), rgba(255, 255, 255, 0.05));
+  color: var(--inv-gold-strong);
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 7vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+body.invitation-page #places-text {
+  margin: 0;
+  color: var(--inv-muted-2);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+body.invitation-page .hero-note {
+  margin-top: 18px;
+  color: var(--inv-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+body.invitation-page .cover-layout {
+  display: grid;
+  gap: 18px;
+}
+
+body.invitation-page .countdown-card {
+  text-align: center;
+}
+
+body.invitation-page .countdown-card h2 {
+  margin: 0 0 14px;
+  font-family: "Fraunces", serif;
+  font-size: 1.4rem;
+  line-height: 1.15;
+  color: var(--inv-gold-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+body.invitation-page #timer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  justify-content: normal;
+  align-items: stretch;
+}
+
+body.invitation-page .time-unit {
+  min-height: 76px;
+  padding: 10px 4px 9px;
+  margin: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(212, 175, 55, 0.02));
+  color: var(--inv-text);
+  display: grid;
+  place-items: center;
+  gap: 6px;
+  align-content: center;
+  text-align: center;
+  font-size: inherit;
+}
+
+body.invitation-page .time-number {
+  font-family: "Fraunces", serif;
+  font-size: 1.36rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--inv-gold-strong);
+}
+
+body.invitation-page .time-label {
+  margin: 0;
+  padding: 0;
+  color: var(--inv-muted);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.invitation-page .envelope-card {
+  text-align: center;
+}
+
+body.invitation-page .envelope-note {
+  margin: 0 0 18px;
+  color: var(--inv-muted);
+  font-size: 1.06rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+body.invitation-page .envelope-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 420px);
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 28px;
+  background: transparent;
+  color: inherit;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body.invitation-page .envelope-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.44);
+}
+
+body.invitation-page #envb.envelope-link {
+  display: inline-flex;
+  width: min(100%, 420px);
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
+body.invitation-page #envb.envelope-link:hover {
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.44);
+}
+
+body.invitation-page .envelope-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) contrast(1.08) brightness(0.92);
+}
+
+body.invitation-page .content-grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+  min-width: 0;
+}
+
+body.invitation-page .gallery-card {
+  padding: clamp(14px, 3.5vw, 18px);
+  overflow: hidden;
+}
+
+body.invitation-page .photo-card {
+  padding: clamp(14px, 3.5vw, 18px);
+  overflow: hidden;
+}
+
+body.invitation-page .photo-frame,
+body.invitation-page .gallery-item {
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  min-height: 220px;
+  background:
+    radial-gradient(circle at top, rgba(212, 175, 55, 0.11), rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+body.invitation-page .photo-frame img,
+body.invitation-page .gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body.invitation-page .photo-frame--logo {
+  min-height: 250px;
+  display: grid;
+  place-items: center;
+}
+
+body.invitation-page .photo-frame--logo img {
+  object-fit: contain;
+  width: min(88%, 300px);
+  height: auto;
+  padding: 0;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.16));
+}
+
+body.invitation-page .gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+body.invitation-page .gallery-item--large {
+  min-height: 260px;
+}
+
+body.invitation-page .story-title {
+  margin: 0 0 12px;
+  font-size: clamp(1.55rem, 4.6vw, 2.5rem);
+  line-height: 1.08;
+  color: var(--inv-text);
+}
+
+body.invitation-page .story-copy,
+body.invitation-page .resource-copy,
+body.invitation-page .action-copy,
+body.invitation-page .closing-copy,
+body.invitation-page .intro-copy {
+  margin: 0;
+  color: var(--inv-muted);
+  line-height: 1.86;
+  font-size: 1.09rem;
+}
+
+body.invitation-page .section-label {
+  margin: 0 0 10px;
+  color: var(--inv-muted-2);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+body.invitation-page .section-icon {
+  width: 1.58rem;
+  height: 1.58rem;
+  flex: 0 0 1.58rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  background:
+    radial-gradient(circle at 35% 20%, rgba(244, 216, 122, 0.3), transparent 52%),
+    rgba(212, 175, 55, 0.08);
+  color: var(--inv-gold-strong);
+  font-size: 0.72rem;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+body.invitation-page .date-line {
+  font-size: clamp(1.6rem, 4.6vw, 2.5rem);
+  color: var(--inv-text);
+  line-height: 1.05;
+}
+
+body.invitation-page .time-line {
+  margin-top: 8px;
+  font-size: clamp(2.1rem, 8vw, 3.6rem);
+  color: var(--inv-accent);
+  line-height: 1;
+}
+
+body.invitation-page .muted {
+  color: var(--inv-muted-2);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+body.invitation-page .timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+body.invitation-page .timeline li {
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(212, 175, 55, 0.025));
+  color: var(--inv-muted);
+  line-height: 1.65;
+  font-size: 1.02rem;
+}
+
+body.invitation-page .timeline strong {
+  color: var(--inv-gold-strong);
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+}
+
+body.invitation-page .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+  min-width: 0;
+}
+
+body.invitation-page .button,
+body.invitation-page .back-button,
+body.invitation-page .ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.18), rgba(255, 255, 255, 0.08));
+  color: var(--inv-text);
+  text-decoration: none;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  max-width: 100%;
+  text-align: center;
+}
+
+body.invitation-page .button:hover,
+body.invitation-page .back-button:hover,
+body.invitation-page .ghost-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.invitation-page .ghost-button {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(212, 175, 55, 0.06));
+  border-color: rgba(212, 175, 55, 0.18);
+}
+
+body.invitation-page .resource-grid {
+  display: grid;
+  gap: 18px;
+}
+
+body.invitation-page .footer-card {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin-top: 0;
+  padding-bottom: 24px;
+  position: relative;
+  overflow: visible;
+  text-align: center;
+  color: var(--inv-muted);
+  line-height: 1.78;
+  font-size: 1rem;
+}
+
+body.invitation-page .footer-card p {
+  margin: 0;
+}
+
+body.invitation-page .footer-card p + p {
+  margin-top: 6px;
+}
+
+body.invitation-page .footer-thanks {
+  color: var(--inv-text);
+  font-family: "Fraunces", serif;
+  font-size: 1.08rem;
+}
+
+body.invitation-page .giftclick-footer {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(212, 175, 55, 0.16);
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+body.invitation-page .giftclick-footer p {
+  color: var(--inv-muted-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+body.invitation-page .giftclick-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), rgba(255, 255, 255, 0.04));
+  color: var(--inv-text);
+  text-decoration: none;
+  box-shadow: none;
+}
+
+body.invitation-page .giftclick-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f4d87a, #d4af37 52%, #7b5a12);
+  color: #121212;
+  font-family: "Fraunces", serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+body.invitation-page .giftclick-word {
+  font-family: "Fraunces", serif;
+  color: var(--inv-gold-strong);
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
+body.invitation-page .giftclick-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--inv-text);
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: none;
+}
+
+body.invitation-page .giftclick-contact i {
+  color: var(--inv-gold-strong);
+}
+
+body.invitation-page .back-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+body.invitation-page .back-button {
+  min-width: min(100%, 280px);
+}
+
+body.invitation-page #music-player-bar {
+  position: fixed;
+  left: auto;
+  bottom: 14px;
+  right: max(14px, calc((100vw - 430px) / 2 - 74px));
+  transform: none;
+  width: 58px;
+  height: 58px;
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(10, 11, 14, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(212, 175, 55, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+body.invitation-page #player-content {
+  max-width: none;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+body.invitation-page #track-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+}
+
+body.invitation-page #track-title {
+  display: none;
+}
+
+body.invitation-page #track-title::before {
+  content: none;
+}
+
+body.invitation-page #track-controls {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+body.invitation-page #play-btn,
+body.invitation-page #pause-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--inv-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+body.invitation-page #play-btn:hover,
+body.invitation-page #pause-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+body.invitation-page #progress-container {
+  display: none;
+}
+
+body.invitation-page #progress-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+body.invitation-page #progress-current {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: linear-gradient(90deg, #f4d87a, #d4af37);
+  border-radius: inherit;
+}
+
+body.invitation-page #time-display {
+  min-width: 52px;
+  text-align: center;
+  color: var(--inv-muted);
+  font-size: 0.88rem;
+}
+
+body.invitation-page .cover-background {
+  background: none;
+}
+
+body.invitation-page .cover-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.12), rgba(8, 9, 11, 0.28)),
+    url("../assets/golden-151hbz9.jpg");
+  background-size: cover;
+  background-position: center center;
+  filter: grayscale(1) saturate(0.22) contrast(1.04) brightness(0.82);
+  transform: scale(1.03);
+  z-index: 0;
+}
+
+body.invitation-page .cover-background-2 {
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.22), rgba(8, 9, 11, 0.42)),
+    url("../assets/golden6-y966t7.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+body.invitation-page .gallery-background-1 {
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
+    url("../assets/golden1-1ww433a.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+body.invitation-page .gallery-background-2 {
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
+    url("../assets/golden2-1j0ussv.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+body.invitation-page .gallery-background-3 {
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
+    url("../assets/golden4-zfjnz5.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+body.invitation-page .gallery-background-4 {
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
+    url("../assets/golden5-m8d8ya.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+body.invitation-page .overlay-surface {
+  position: relative;
+  overflow: hidden;
+}
+
+body.invitation-page .overlay-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(9, 10, 13, 0.12), rgba(9, 10, 13, 0.52));
+  z-index: 1;
+}
+
+body.invitation-page .overlay-surface > * {
+  position: relative;
+  z-index: 2;
+}
+
+body.invitation-page .hero-stack {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+body.invitation-page .cover-actions {
+  display: grid;
+  gap: 14px;
+}
+
+body.invitation-page .cover-open-text {
+  margin: 0;
+  color: var(--inv-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+body.invitation-page .cover-pass-note {
+  margin-top: 12px;
+  color: var(--inv-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+body.invitation-page .cover-date {
+  margin-top: 10px;
+  color: var(--inv-accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+}
+
+@media (max-width: 430px) {
+  body.invitation-page {
+    font-size: 18px;
+  }
+
+  body.invitation-page .page-shell {
+    padding: 0 14px;
+  }
+
+  body.invitation-page .hero-card {
+    padding: 28px 20px;
+  }
+
+  body.invitation-page .card,
+  body.invitation-page .pass-card,
+  body.invitation-page .timeline-card,
+  body.invitation-page .resource-card,
+  body.invitation-page .footer-card {
+    padding: 24px 20px;
+  }
+
+  body.invitation-page .brand-line {
+    font-size: 0.86rem;
+    letter-spacing: 0.28em;
+  }
+
+  body.invitation-page .hero-name {
+    font-size: 4rem;
+  }
+
+  body.invitation-page .hero-copy {
+    font-size: 1.22rem;
+    line-height: 1.7;
+  }
+
+  body.invitation-page .hero-tag,
+  body.invitation-page .cover-date {
+    font-size: 0.88rem;
+    letter-spacing: 0.18em;
+  }
+
+  body.invitation-page .section-title {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+  }
+
+  body.invitation-page .section-label {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+  }
+
+  body.invitation-page #name {
+    font-size: 2.05rem;
+  }
+
+  body.invitation-page .reserved-line,
+  body.invitation-page .hero-note,
+  body.invitation-page .envelope-note {
+    font-size: 1.22rem;
+  }
+
+  body.invitation-page .story-title,
+  body.invitation-page .closing-title {
+    font-size: 1.78rem;
+    line-height: 1.12;
+  }
+
+  body.invitation-page .story-copy,
+  body.invitation-page .resource-copy,
+  body.invitation-page .action-copy,
+  body.invitation-page .closing-copy,
+  body.invitation-page .intro-copy {
+    font-size: 1.24rem;
+    line-height: 1.72;
+  }
+
+  body.invitation-page .date-line {
+    font-size: 2rem;
+  }
+
+  body.invitation-page .time-line {
+    font-size: 2.65rem;
+  }
+
+  body.invitation-page .muted {
+    font-size: 1.14rem;
+    line-height: 1.62;
+  }
+
+  body.invitation-page .timeline li {
+    font-size: 1.14rem;
+    line-height: 1.58;
+  }
+
+  body.invitation-page .button,
+  body.invitation-page .back-button,
+  body.invitation-page .ghost-button {
+    min-height: 52px;
+    font-size: 1.14rem;
+  }
+
+  body.invitation-page .footer-card {
+    font-size: 1.12rem;
+  }
+
+  body.invitation-page .footer-thanks {
+    font-size: 1.26rem;
+  }
+
+  body.invitation-page .giftclick-footer p {
+    font-size: 1.08rem;
+  }
+
+  body.invitation-page .giftclick-word {
+    font-size: 1.36rem;
+  }
+
+  body.invitation-page .giftclick-contact {
+    min-height: 42px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 599px) {
+  body.invitation-page #timer,
+  body.invitation-page .time-labels {
+    gap: 8px;
+  }
+
+  body.invitation-page .time-unit {
+    min-height: 74px;
+  }
+}
+
+@media (min-width: 380px) {
+  body.invitation-page .time-unit {
+    min-height: 82px;
+  }
+
+  body.invitation-page .time-number {
+    font-size: 1.58rem;
+  }
+
+  body.invitation-page .time-label {
+    font-size: 0.55rem;
+  }
+}
+
+@media (min-width: 720px) {
+  body.invitation-page .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.invitation-page .content-grid .card,
+  body.invitation-page .content-grid .timeline-card,
+  body.invitation-page .content-grid .resource-card {
+    height: auto;
+  }
+
+  body.invitation-page .content-grid .hero-span-2 {
+    grid-column: 1 / -1;
+  }
+
+  body.invitation-page #timer {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  body.invitation-page .time-unit {
+    min-height: 96px;
+    padding: 14px 8px 12px;
+    border-radius: 20px;
+    gap: 8px;
+  }
+
+  body.invitation-page .time-number {
+    font-size: 2rem;
+  }
+
+  body.invitation-page .time-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+  }
+
+  body.invitation-page .gallery-card {
+    padding: 18px;
+  }
+
+  body.invitation-page .photo-card {
+    padding: 18px;
+  }
+
+  body.invitation-page .photo-frame,
+  body.invitation-page .gallery-item {
+    min-height: 260px;
+  }
+
+  body.invitation-page .photo-frame--logo {
+    min-height: 300px;
+  }
+
+  body.invitation-page .resource-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 920px) {
+  body.invitation-page .page-shell {
+    width: min(100%, 430px);
+  }
+}
