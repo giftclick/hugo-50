@@ -31,7 +31,11 @@
           <p class="brand-line">Mario Hugo</p>
           <img class="hero-number" src="assets/logowell.png" alt="50 años">
           <h1 class="hero-name">Mario Hugo</h1>
-          <p class="hero-tag">celebra 50 años</p>
+          <p class="hero-tag hero-tag--with-number">
+            <span>celebra</span>
+            <img class="hero-tag-number" src="assets/numero-50-gold.svg" alt="50">
+            <span>años</span>
+          </p>
           <p class="hero-copy">50 años no son solo una fecha. Son historias, aprendizajes, personas importantes y momentos que han marcado mi vida. Hoy quiero celebrar este camino con quienes han sido parte de mi historia, de mis alegrías y de mis mejores recuerdos.</p>
         </div>
       </header>
@@ -40,7 +44,7 @@
         <div class="section-title"><i class="fas fa-ticket-alt section-icon" aria-hidden="true"></i><span id="passes-title">Pase</span></div>
         <h2 id="name">Invitado especial</h2>
         <p class="reserved-line">Tenemos <span id="reserved-phrase">Reservado</span></p>
-        <div id="passnumbers">1</div>
+        <div id="passnumbers"><span id="passnumbers-value">1</span></div>
         <p id="places-text">Lugar por confirmar</p>
       </section>
 
@@ -50,7 +54,7 @@
         </figure>
       </section>
 
-      <section class="card hero-span-2">
+      <section class="card info-card hero-span-2">
         <p class="section-label"><i class="fas fa-quote-left section-icon" aria-hidden="true"></i><span>Frase central</span></p>
         <h2 class="story-title">La vida se celebra mejor cuando estamos rodeados de quienes queremos.</h2>
         <p class="story-copy">Esta noche será especial porque la compartiré contigo.</p>
@@ -62,7 +66,7 @@
         </figure>
       </section>
 
-      <section class="card">
+      <section class="card info-card date-card">
         <p class="section-label"><i class="fas fa-calendar-alt section-icon" aria-hidden="true"></i><span>Fecha</span></p>
         <div class="date-line">29 de agosto de 2026</div>
         <div class="time-line">5:00 PM</div>
@@ -75,14 +79,35 @@
         </figure>
       </section>
 
-      <section class="timeline-card card">
-        <p class="section-label"><i class="fas fa-clock section-icon" aria-hidden="true"></i><span>Itinerario</span></p>
-        <ol class="timeline">
-          <li><strong>05:00 pm</strong> Recepción de invitados</li>
-          <li><strong>05:15 pm</strong> Degustación de cócteles</li>
-          <li><strong>05:30 pm</strong> Ceremonia</li>
-          <li><strong>06:30 pm</strong> Cena</li>
-          <li><strong>07:30 pm</strong> Fiesta</li>
+      <section class="timeline-card card timeline-card--featured">
+        <p class="timeline-kicker"><i class="fas fa-clock section-icon" aria-hidden="true"></i><span>Programa de la noche</span></p>
+        <h2 class="timeline-heading">Itinerario</h2>
+        <ol class="timeline timeline-flow" aria-label="Itinerario de la celebración">
+          <li class="timeline-step">
+            <time class="timeline-time">05:00 pm</time>
+            <span class="timeline-pin" aria-hidden="true"><i class="fas fa-glass-cheers"></i></span>
+            <span class="timeline-detail"><strong>Recepción</strong><span>de invitados</span></span>
+          </li>
+          <li class="timeline-step">
+            <time class="timeline-time">05:15 pm</time>
+            <span class="timeline-pin" aria-hidden="true"><i class="fas fa-cocktail"></i></span>
+            <span class="timeline-detail"><strong>Cócteles</strong><span>degustación</span></span>
+          </li>
+          <li class="timeline-step">
+            <time class="timeline-time">05:30 pm</time>
+            <span class="timeline-pin" aria-hidden="true"><i class="fas fa-star"></i></span>
+            <span class="timeline-detail"><strong>Ceremonia</strong><span>momento central</span></span>
+          </li>
+          <li class="timeline-step">
+            <time class="timeline-time">06:30 pm</time>
+            <span class="timeline-pin" aria-hidden="true"><i class="fas fa-utensils"></i></span>
+            <span class="timeline-detail"><strong>Cena</strong><span>brindis y mesa</span></span>
+          </li>
+          <li class="timeline-step">
+            <time class="timeline-time">07:30 pm</time>
+            <span class="timeline-pin" aria-hidden="true"><i class="fas fa-music"></i></span>
+            <span class="timeline-detail"><strong>Fiesta</strong><span>música y baile</span></span>
+          </li>
         </ol>
       </section>
 
@@ -108,9 +133,9 @@
 
       <section class="resource-card card">
         <p class="section-label"><i class="fas fa-map-marker-alt section-icon" aria-hidden="true"></i><span>Ubicación</span></p>
-        <p class="resource-copy">La ubicación exacta se compartirá al confirmar tu asistencia. Toca el botón para solicitarla.</p>
+        <p class="resource-copy">La celebración será en Av. Trapiche 1085, Comas. Toca el botón para abrir el mapa.</p>
         <div class="button-row">
-          <a class="ghost-button" href="https://wa.me/51987584570?text=Hola%20Mario%20Hugo.%20Por%20favor%20env%C3%ADame%20la%20ubicaci%C3%B3n%20de%20la%20fiesta." target="_blank" rel="noreferrer">Tocar para pedir ubicación</a>
+          <a class="ghost-button" href="https://maps.app.goo.gl/6xxTL3tBpxi11DMV6" target="_blank" rel="noreferrer">Tocar para ver mapa</a>
         </div>
       </section>
 
@@ -142,7 +167,7 @@
         </div>
       </section>
 
-      <section class="resource-card card hero-span-2">
+      <section class="resource-card card info-card hero-span-2">
         <p class="section-label"><i class="fas fa-gift section-icon" aria-hidden="true"></i><span>Regalos</span></p>
         <h2 class="closing-title">Tu presencia será mi mejor regalo.</h2>
         <p class="closing-copy">Para mí, lo más valioso será compartir esta noche contigo. Si deseas tener un detalle, lo recibiré con mucho cariño y agradecimiento.</p>
