@@ -1,13 +1,13 @@
 :root {
   --inv-bg-0: #0c0d10;
-  --inv-bg-1: #14171b;
+  --inv-bg-1: #0c0d10;
   --inv-bg-2: #1d2127;
   --inv-surface: rgba(255, 255, 255, 0.06);
   --inv-surface-strong: rgba(255, 255, 255, 0.1);
-  --inv-line: rgba(255, 255, 255, 0.12);
+  --inv-line: rgb(245 216 122);
   --inv-text: #f4f5f7;
   --inv-muted: #c0c5cc;
-  --inv-muted-2: #8d939b;
+  --inv-muted-2: rgb(245 216 122);;
   --inv-gold: #d4af37;
   --inv-gold-soft: rgba(212, 175, 55, 0.16);
   --inv-gold-strong: #f4d87a;
@@ -41,9 +41,7 @@ body.invitation-page {
   width: 100%;
   max-width: none !important;
   overflow-x: clip;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 42%),
-    linear-gradient(180deg, var(--inv-bg-1) 0%, #111419 40%, var(--inv-bg-0) 100%);
+  background:#4e4e4e;
   color: var(--inv-text);
   font-family: var(--inv-font-body);
   font-size: 17px;
@@ -197,7 +195,7 @@ body.invitation-page .hero-tag--cover-number {
 }
 
 body.invitation-page .hero-tag-number--large {
-  width: clamp(9.8rem, 40vw, 13rem);
+  width: 100%;
   margin: -0.32em 0 -0.2em;
   filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.42)) drop-shadow(0 0 18px rgba(212, 175, 55, 0.24));
 }
@@ -407,7 +405,6 @@ body.invitation-page .envelope-image {
   display: block;
   width: 100%;
   height: auto;
-  filter: grayscale(1) contrast(1.08) brightness(0.92);
 }
 
 body.invitation-page .envelope-seal {
@@ -1198,7 +1195,7 @@ body.invitation-page .cover-background::before {
   inset: 0;
   background:
     linear-gradient(180deg, rgba(8, 9, 11, 0.12), rgba(8, 9, 11, 0.28)),
-    url("../assets/golden-151hbz9.jpg");
+    url("../assets/fotos invitacion 1/1.jpeg");
   background-size: cover;
   background-position: center center;
   filter: grayscale(1) saturate(0.22) contrast(1.04) brightness(0.82);
@@ -1209,7 +1206,7 @@ body.invitation-page .cover-background::before {
 body.invitation-page .cover-background-2 {
   background:
     linear-gradient(180deg, rgba(8, 9, 11, 0.22), rgba(8, 9, 11, 0.42)),
-    url("../assets/golden6-y966t7.jpg");
+    url("../assets/fotos invitacion 1/5.jpeg");
   background-size: cover;
   background-position: center center;
 }
@@ -1217,7 +1214,7 @@ body.invitation-page .cover-background-2 {
 body.invitation-page .gallery-background-1 {
   background:
     linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
-    url("../assets/golden1-1ww433a.jpg");
+    url("../assets/fotos invitacion 1/1.jpeg");
   background-size: cover;
   background-position: center center;
 }
@@ -1225,7 +1222,7 @@ body.invitation-page .gallery-background-1 {
 body.invitation-page .gallery-background-2 {
   background:
     linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
-    url("../assets/golden2-1j0ussv.jpg");
+    url("../assets/fotos invitacion 1/2.jpeg");
   background-size: cover;
   background-position: center center;
 }
@@ -1233,7 +1230,7 @@ body.invitation-page .gallery-background-2 {
 body.invitation-page .gallery-background-3 {
   background:
     linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
-    url("../assets/golden4-zfjnz5.jpg");
+    url("../assets/fotos invitacion 1/3.jpeg");
   background-size: cover;
   background-position: center center;
 }
@@ -1241,7 +1238,7 @@ body.invitation-page .gallery-background-3 {
 body.invitation-page .gallery-background-4 {
   background:
     linear-gradient(180deg, rgba(8, 9, 11, 0.24), rgba(8, 9, 11, 0.44)),
-    url("../assets/golden5-m8d8ya.jpg");
+    url("../assets/fotos invitacion 1/4.jpeg");
   background-size: cover;
   background-position: center center;
 }
@@ -1355,7 +1352,7 @@ body.invitation-page .cover-date {
   }
 
   body.invitation-page .hero-tag-number--large {
-    width: min(11.7rem, 66vw);
+    width: 100%;
     margin: -0.32em 0 -0.22em;
   }
 

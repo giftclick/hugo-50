@@ -1,6 +1,8 @@
 
 (() => {
     let exportAnimationObserver = null;
+    let countdownIntervalId = null;
+    let internalNavigationReady = false;
 
     function initializeAnimations(root = document) {
         const animationElements = Array.from(root.querySelectorAll(
@@ -69,10 +71,93 @@
     }
 
     function initializeCountdowns() {
+        if (countdownIntervalId) {
+            window.clearInterval(countdownIntervalId);
+            countdownIntervalId = null;
+        }
         const countdowns = Array.from(document.querySelectorAll('[data-export-date]'));
         const update = () => countdowns.forEach(updateCountdown);
         update();
-        if (countdowns.length) window.setInterval(update, 1000);
+        if (countdowns.length) countdownIntervalId = window.setInterval(update, 1000);
+    }
+
+    function isInternalInvitationUrl(url) {
+        const pageName = url.pathname.split('/').pop() || 'index.html';
+        return url.origin === window.location.origin && /^(index|home)\.html$/i.test(pageName);
+    }
+
+    function keepCurrentQueryIfMissing(url) {
+        if (!url.search && window.location.search) {
+            url.search = window.location.search;
+        }
+        return url;
+    }
+
+    function getInternalNavigationUrl(link) {
+        if (!link) return null;
+        const target = (link.getAttribute('target') || '').trim();
+        const rawHref = link.getAttribute('href') || '';
+        if (target && target !== '_self') return null;
+        if (!rawHref || rawHref.startsWith('#') || /^(mailto:|tel:|javascript:)/i.test(rawHref)) return null;
+
+        const url = keepCurrentQueryIfMissing(new URL(rawHref, window.location.href));
+        return isInternalInvitationUrl(url) ? url : null;
+    }
+
+    function toInternalPageHref(url) {
+        const targetName = url.pathname.split('/').pop() || 'index.html';
+        return targetName + url.search + url.hash;
+    }
+
+    async function navigateInternalInvitation(url, options = {}) {
+        const targetName = url.pathname.split('/').pop() || 'index.html';
+        const response = await window.fetch(targetName + url.search, {
+            credentials: 'same-origin'
+        });
+        if (!response.ok) throw new Error('No se pudo cargar ' + targetName);
+
+        const html = await response.text();
+        const nextDocument = new DOMParser().parseFromString(html, 'text/html');
+        const nextContent = nextDocument.querySelector('#content');
+        const currentContent = document.querySelector('#content');
+        if (!nextContent || !currentContent) throw new Error('No se encontro el contenido de la invitacion');
+
+        document.title = nextDocument.title || document.title;
+        document.body.className = nextDocument.body.className || document.body.className;
+        if (nextDocument.body.hasAttribute('data-theme')) {
+            document.body.setAttribute('data-theme', nextDocument.body.getAttribute('data-theme'));
+        } else {
+            document.body.removeAttribute('data-theme');
+        }
+
+        currentContent.innerHTML = nextContent.innerHTML;
+
+        if (options.push !== false) {
+            window.history.pushState({ giftclickPage: targetName }, '', toInternalPageHref(url));
+        }
+
+        applyGuestPassFromQuery();
+        initializeAnimations(currentContent);
+        initializeCountdowns();
+        initializeStaticRsvp();
+        window.scrollTo(0, 0);
+    }
+
+    function initializeInternalNavigation() {
+        if (internalNavigationReady) return;
+        internalNavigationReady = true;
+
+        window.history.replaceState({
+            giftclickPage: window.location.pathname.split('/').pop() || 'index.html'
+        }, '', window.location.href);
+
+        window.addEventListener('popstate', () => {
+            const url = keepCurrentQueryIfMissing(new URL(window.location.href));
+            if (!isInternalInvitationUrl(url)) return;
+            navigateInternalInvitation(url, { push: false }).catch(() => {
+                window.location.reload();
+            });
+        });
     }
 
     function initializeMusic() {
@@ -352,21 +437,43 @@
             const link = event.target.closest && event.target.closest('a[href]');
             if (!link) return;
             try {
-                const url = new URL(link.getAttribute('href'), window.location.href);
-                if (url.origin === window.location.origin && /(?:index|home)\.html$/i.test(url.pathname)) {
-                    const snapshot = savePlaybackState(!audio.paused, true);
-                    appendMusicSnapshotToUrl(url, snapshot);
-                    const targetName = url.pathname.split('/').pop() || 'index.html';
-                    link.setAttribute('href', targetName + url.search + url.hash);
-                }
+                const url = getInternalNavigationUrl(link);
+                if (!url) return;
+                const snapshot = savePlaybackState(!audio.paused, true);
+                appendMusicSnapshotToUrl(url, snapshot);
+                link.setAttribute('href', toInternalPageHref(url));
             } catch (error) {
                 // Ignore malformed links.
             }
         };
 
-        ['pointerdown', 'touchstart', 'click'].forEach((eventName) => {
+        const handleInternalNavigationClick = (event) => {
+            if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+                return;
+            }
+
+            const link = event.target.closest && event.target.closest('a[href]');
+            if (!link) return;
+
+            try {
+                const url = getInternalNavigationUrl(link);
+                if (!url) return;
+                const snapshot = savePlaybackState(!audio.paused, true);
+                appendMusicSnapshotToUrl(url, snapshot);
+                link.setAttribute('href', toInternalPageHref(url));
+                event.preventDefault();
+                navigateInternalInvitation(url).catch(() => {
+                    window.location.href = toInternalPageHref(url);
+                });
+            } catch (error) {
+                // If the internal swap fails, allow the browser navigation fallback.
+            }
+        };
+
+        ['pointerdown', 'touchstart'].forEach((eventName) => {
             document.addEventListener(eventName, saveBeforeInternalNavigation, true);
         });
+        document.addEventListener('click', handleInternalNavigationClick);
 
         window.addEventListener('pagehide', () => savePlaybackState(!audio.paused, true));
         window.addEventListener('beforeunload', () => savePlaybackState(!audio.paused, true));
@@ -474,6 +581,7 @@
         applyGuestPassFromQuery();
         initializeAnimations();
         initializeCountdowns();
+        initializeInternalNavigation();
         initializeMusic();
         initializeStaticRsvp();
     });
