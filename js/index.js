@@ -174,6 +174,7 @@
 
         const audio = new Audio(source);
         audio.preload = 'auto';
+        audio.loop = true;
         let lastSavedAt = 0;
         let restorePositionPromise = null;
         const musicQueryKeys = {

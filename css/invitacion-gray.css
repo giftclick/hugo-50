@@ -2,6 +2,8 @@
   --inv-bg-0: #0c0d10;
   --inv-bg-1: #0c0d10;
   --inv-bg-2: #1d2127;
+  --inv-page-bg: #efe7dc;
+  --inv-card-bg: #4e4e4e;
   --inv-surface: rgba(255, 255, 255, 0.06);
   --inv-surface-strong: rgba(255, 255, 255, 0.1);
   --inv-line: rgb(245 216 122);
@@ -20,7 +22,7 @@
   --inv-font-body: "Lora", "DM Sans", serif;
   --inv-font-ui: "DM Sans", "Helvetica Neue", Arial, sans-serif;
   --inv-font-serif: "Playfair Display", "Fraunces", serif;
-  --inv-font-script: "Herr Von Muellerhoff", "Caveat", cursive;
+  --inv-font-script: "Dancing Script", "Herr Von Muellerhoff", cursive;
   --inv-font-smallcaps: "Cinzel", "Playfair Display", serif;
 }
 
@@ -30,7 +32,7 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--inv-bg-0);
+  background: var(--inv-page-bg);
   overflow-x: clip;
 }
 
@@ -43,7 +45,7 @@ body.invitation-page {
   width: 100%;
   max-width: none !important;
   overflow-x: clip;
-  background:#4e4e4e;
+  background: var(--inv-page-bg);
   color: var(--inv-text);
   font-family: var(--inv-font-body);
   font-size: 17px;
@@ -54,10 +56,10 @@ body.invitation-page::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(86, 76, 62, 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
-  opacity: 0.35;
-  mix-blend-mode: soft-light;
+  opacity: 0.45;
+  mix-blend-mode: multiply;
 }
 
 body.invitation-page #content {
@@ -89,6 +91,7 @@ body.invitation-page .footer-card {
   width: 100%;
   min-width: 0;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  background-color: var(--inv-card-bg);
   border: 1px solid var(--inv-line);
   border-radius: var(--inv-radius-xl);
   box-shadow: var(--inv-shadow), 0 0 0 1px rgba(212, 175, 55, 0.04);
@@ -135,18 +138,18 @@ body.invitation-page .time-line {
 body.invitation-page .hero-name {
   margin: 0;
   font-family: var(--inv-font-script);
-  font-size: clamp(3rem, 10vw, 5.4rem);
+  font-size: clamp(3.25rem, 10vw, 5.65rem);
   line-height: 0.8;
   letter-spacing: 0.02em;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 body.invitation-page .hero-copy {
   margin: 18px auto 0;
   max-width: 44rem;
-  color: var(--inv-muted);
-  font-size: 1.08rem;
-  line-height: 1.75;
+  color: var(--inv-text);
+  font-size: 1.5rem;
+  line-height: 1.25;
 }
 
 body.invitation-page .hero-number {
@@ -457,6 +460,7 @@ body.invitation-page .gallery-item {
   min-height: 220px;
   background:
     radial-gradient(circle at top, rgba(212, 175, 55, 0.11), rgba(255, 255, 255, 0.03) 42%, rgba(255, 255, 255, 0.02) 100%);
+  background-color: var(--inv-card-bg);
   border: 1px solid rgba(212, 175, 55, 0.18);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
@@ -505,6 +509,7 @@ body.invitation-page .info-card {
   background:
     radial-gradient(circle at 50% 0%, rgba(244, 216, 122, 0.1), transparent 36%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.082), rgba(255, 255, 255, 0.035));
+  background-color: var(--inv-card-bg);
 }
 
 body.invitation-page .info-card::before {
@@ -532,6 +537,18 @@ body.invitation-page .story-title {
   font-size: clamp(1.55rem, 4.6vw, 2.5rem);
   line-height: 1.14;
   color: var(--inv-text);
+}
+
+body.invitation-page .closing-title,
+body.invitation-page .resource-copy.highlighted-message,
+body.invitation-page .intro-copy.highlighted-message {
+  margin: 0 auto;
+  max-width: 30rem;
+  color: var(--inv-text);
+  font-family: var(--inv-font-serif);
+  font-size: 1.78rem;
+  font-weight: 700;
+  line-height: 1.16;
 }
 
 body.invitation-page .story-copy,
@@ -622,6 +639,93 @@ body.invitation-page .date-card .time-line {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
+body.invitation-page .save-date-card {
+  gap: 20px;
+  padding: 34px 22px 32px;
+  background:
+    radial-gradient(circle at 50% 6%, rgba(255, 255, 255, 0.1), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+  background-color: var(--inv-card-bg);
+}
+
+body.invitation-page .save-date-title {
+  margin: 0;
+  color: var(--inv-text);
+  font-family: var(--inv-font-script);
+  font-size: 4.6rem;
+  font-weight: 700;
+  line-height: 0.92;
+}
+
+body.invitation-page .save-date-month {
+  margin: 4px 0 0;
+  color: var(--inv-text);
+  font-family: var(--inv-font-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+body.invitation-page .save-date-row {
+  width: min(100%, 330px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 82px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+
+body.invitation-page .save-date-side {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+  color: var(--inv-text);
+  font-family: var(--inv-font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+body.invitation-page .save-date-rule {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: rgba(244, 245, 247, 0.86);
+}
+
+body.invitation-page .save-date-day {
+  color: var(--inv-text);
+  font-family: var(--inv-font-serif);
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 0.9;
+  text-align: center;
+}
+
+@media (max-width: 430px) {
+  body.invitation-page .save-date-title {
+    font-size: 3.15rem;
+  }
+
+  body.invitation-page .save-date-month {
+    font-size: 1.65rem;
+  }
+
+  body.invitation-page .save-date-row {
+    grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr);
+    gap: 9px;
+  }
+
+  body.invitation-page .save-date-side {
+    gap: 10px;
+    font-size: 1.08rem;
+  }
+
+  body.invitation-page .save-date-day {
+    font-size: 4.25rem;
+  }
+}
+
 body.invitation-page .muted {
   color: var(--inv-muted-2);
   font-size: 1rem;
@@ -665,6 +769,7 @@ body.invitation-page .timeline-card--featured {
   background:
     radial-gradient(circle at 50% 0%, rgba(244, 216, 122, 0.16), transparent 32%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.035));
+  background-color: var(--inv-card-bg);
 }
 
 body.invitation-page .timeline-card--featured::before {
@@ -679,11 +784,11 @@ body.invitation-page .timeline-card--featured::before {
 body.invitation-page .timeline-kicker {
   position: relative;
   z-index: 1;
-  margin: 0;
+  margin: 0 0 24px;
   color: var(--inv-muted-2);
   font-family: var(--inv-font-smallcaps);
-  font-size: 0.74rem;
-  letter-spacing: 0.16em;
+  font-size: 1.08rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
@@ -699,8 +804,8 @@ body.invitation-page .timeline-heading {
   margin: 10px 0 24px;
   color: var(--inv-text);
   font-family: var(--inv-font-script);
-  font-size: clamp(3.4rem, 13vw, 5.2rem);
-  font-weight: 400;
+  font-size: clamp(3.65rem, 13vw, 5.45rem);
+  font-weight: 700;
   line-height: 0.76;
   letter-spacing: 0.02em;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.38);
@@ -709,8 +814,8 @@ body.invitation-page .timeline-heading {
 body.invitation-page .timeline-flow {
   position: relative;
   z-index: 1;
-  gap: 18px;
-  padding: 6px 0 2px;
+  gap: 22px;
+  padding: 2px 0 2px;
 }
 
 body.invitation-page .timeline-flow::before {
@@ -727,10 +832,10 @@ body.invitation-page .timeline-flow::before {
 body.invitation-page .timeline-flow .timeline-step {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
-  min-height: 74px;
+  gap: 12px;
+  min-height: 82px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -743,8 +848,8 @@ body.invitation-page .timeline-flow .timeline-step {
 body.invitation-page .timeline-pin {
   grid-column: 2;
   grid-row: 1;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
@@ -755,7 +860,7 @@ body.invitation-page .timeline-pin {
     radial-gradient(circle at 35% 24%, rgba(255, 244, 188, 0.42), transparent 48%),
     linear-gradient(180deg, rgba(212, 175, 55, 0.22), rgba(255, 255, 255, 0.06));
   color: var(--inv-gold-strong);
-  font-size: 1.02rem;
+  font-size: 1.12rem;
   box-shadow: 0 13px 28px rgba(0, 0, 0, 0.3), inset 0 0 0 6px rgba(12, 13, 16, 0.84);
 }
 
@@ -767,7 +872,7 @@ body.invitation-page .timeline-time {
   max-width: 100%;
   color: var(--inv-gold-strong);
   font-family: var(--inv-font-serif);
-  font-size: 1.06rem;
+  font-size: 1.24rem;
   font-weight: 700;
   line-height: 1.08;
   text-align: right;
@@ -788,7 +893,7 @@ body.invitation-page .timeline-detail strong {
   display: block;
   color: var(--inv-text);
   font-family: var(--inv-font-serif);
-  font-size: 1.14rem;
+  font-size: 1.32rem;
   line-height: 1.05;
 }
 
@@ -796,7 +901,7 @@ body.invitation-page .timeline-detail span {
   display: block;
   margin-top: 3px;
   color: var(--inv-muted);
-  font-size: 0.95rem;
+  font-size: 1.08rem;
   line-height: 1.25;
 }
 
@@ -825,6 +930,7 @@ body.invitation-page .resource-card:has(.button-row) {
   background:
     radial-gradient(circle at 50% 0%, rgba(244, 216, 122, 0.13), transparent 36%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035));
+  background-color: var(--inv-card-bg);
 }
 
 body.invitation-page .card:has(.button-row)::before,
@@ -855,6 +961,20 @@ body.invitation-page .resource-card:has(.button-row) .resource-copy {
   max-width: 28rem;
   margin: 0 auto;
   color: #d7dbe0;
+}
+
+body.invitation-page .resource-card:has(.button-row) .resource-copy.highlighted-message {
+  max-width: 30rem;
+  color: var(--inv-text);
+  font-size: 1.78rem;
+  line-height: 1.16;
+}
+
+body.invitation-page .card:has(.button-row) .intro-copy.highlighted-message {
+  max-width: 30rem;
+  color: var(--inv-text);
+  font-size: 1.78rem;
+  line-height: 1.16;
 }
 
 body.invitation-page .button-row {
@@ -994,6 +1114,12 @@ body.invitation-page .back-wrap {
 body.invitation-page .back-button {
   min-width: min(100%, 280px);
   width: auto;
+  border-color: rgba(244, 216, 122, 0.62);
+  background:
+    radial-gradient(circle at 30% 0%, rgba(255, 244, 188, 0.46), transparent 44%),
+    linear-gradient(180deg, rgba(212, 175, 55, 0.56), rgba(94, 73, 20, 0.72));
+  color: #fff;
+  box-shadow: 0 18px 38px rgba(39, 32, 19, 0.24), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 body.invitation-page #music-player-bar {
@@ -1189,6 +1315,7 @@ body.invitation-page .music-consent-secondary {
 
 body.invitation-page .cover-background {
   background: none;
+  background-color: var(--inv-card-bg);
 }
 
 body.invitation-page .cover-background::before {
@@ -1196,13 +1323,22 @@ body.invitation-page .cover-background::before {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 9, 11, 0.12), rgba(8, 9, 11, 0.28)),
-    url("../assets/fotos invitacion 1/0.jpeg");
+    linear-gradient(180deg, rgba(8, 9, 11, 0.04), rgba(8, 9, 11, 0.12)),
+    url("../assets/fotos invitacion 1/0.jpg");
   background-size: cover;
   background-position: center center;
-  filter: grayscale(1) saturate(0.22) contrast(1.04) brightness(0.82);
+  filter: grayscale(1) contrast(1.03) brightness(1.08);
   transform: scale(1.03);
   z-index: 0;
+}
+
+body.invitation-page .cover-background .hero-name {
+  color: #fff;
+  -webkit-text-stroke: 0.3px rgba(8, 9, 11, 0.5);
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.78),
+    0 8px 24px rgba(0, 0, 0, 0.58),
+    0 0 1px rgba(0, 0, 0, 0.95);
 }
 
 body.invitation-page .cover-background-2 {
@@ -1255,7 +1391,7 @@ body.invitation-page .overlay-surface::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(9, 10, 13, 0.12), rgba(9, 10, 13, 0.52));
+  background: linear-gradient(180deg, rgba(9, 10, 13, 0.06), rgba(9, 10, 13, 0.28));
   z-index: 1;
 }
 
@@ -1325,12 +1461,12 @@ body.invitation-page .cover-date {
   }
 
   body.invitation-page .hero-name {
-    font-size: 4rem;
+    font-size: 4.25rem;
   }
 
   body.invitation-page .hero-copy {
-    font-size: 1.22rem;
-    line-height: 1.7;
+    font-size: 1.5rem;
+    line-height: 1.18;
   }
 
   body.invitation-page .hero-tag,
@@ -1432,42 +1568,43 @@ body.invitation-page .cover-date {
   }
 
   body.invitation-page .timeline-kicker {
-    font-size: 0.86rem;
+    margin-bottom: 24px;
+    font-size: 1.12rem;
     letter-spacing: 0.08em;
   }
 
   body.invitation-page .timeline-heading {
     margin: 12px 0 26px;
-    font-size: 4.35rem;
+    font-size: 4.6rem;
   }
 
   body.invitation-page .timeline-flow {
-    gap: 17px;
+    gap: 20px;
   }
 
   body.invitation-page .timeline-flow .timeline-step {
-    grid-template-columns: minmax(0, 1fr) 46px minmax(0, 1fr);
-    gap: 8px;
-    min-height: 76px;
+    grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1fr);
+    gap: 9px;
+    min-height: 82px;
   }
 
   body.invitation-page .timeline-pin {
-    width: 46px;
-    height: 46px;
-    font-size: 0.98rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.08rem;
     box-shadow: 0 13px 28px rgba(0, 0, 0, 0.3), inset 0 0 0 5px rgba(12, 13, 16, 0.84);
   }
 
   body.invitation-page .timeline-time {
-    font-size: 1.08rem;
+    font-size: 1.22rem;
   }
 
   body.invitation-page .timeline-detail strong {
-    font-size: 1.12rem;
+    font-size: 1.28rem;
   }
 
   body.invitation-page .timeline-detail span {
-    font-size: 1rem;
+    font-size: 1.12rem;
   }
 
   body.invitation-page .button,
@@ -1598,5 +1735,127 @@ body.invitation-page .cover-date {
 @media (min-width: 920px) {
   body.invitation-page .page-shell {
     width: min(100%, 430px);
+  }
+}
+
+@media (min-width: 720px) {
+  body.invitation-page .cover-layout {
+    width: min(100%, 640px);
+  }
+}
+
+body.invitation-page .countdown-card {
+  padding: clamp(24px, 5vw, 36px) clamp(18px, 5vw, 32px) clamp(26px, 5vw, 38px);
+  background: linear-gradient(180deg, #f7f3ee 0%, #ece6dc 100%);
+  color: #111;
+  border-color: rgba(28, 20, 12, 0.08);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+body.invitation-page .countdown-card .countdown-heading {
+  margin: 0 0 clamp(18px, 4vw, 26px);
+  color: #2a2927;
+  font-family: var(--inv-font-script);
+  font-size: clamp(3.25rem, 8vw, 5.15rem);
+  font-weight: 700;
+  line-height: 0.9;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+body.invitation-page .countdown-card #timer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+body.invitation-page .countdown-card .time-unit {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #111;
+  display: grid;
+  place-items: center;
+  gap: 0.28rem;
+  text-align: center;
+}
+
+body.invitation-page .countdown-card .time-number {
+  color: #000;
+  font-family: var(--inv-font-serif);
+  font-size: 4.15rem;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+body.invitation-page .countdown-card .time-label {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-family: var(--inv-font-smallcaps);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+body.invitation-page .countdown-card .time-label-short {
+  display: none;
+}
+
+body.invitation-page .countdown-card .time-separator {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-top: -14px;
+  color: #000;
+  font-family: var(--inv-font-serif);
+  font-size: 3.55rem;
+  font-weight: 700;
+  line-height: 0.84;
+  user-select: none;
+  white-space: nowrap;
+}
+
+@media (max-width: 719px) {
+  body.invitation-page .countdown-card .time-label-full {
+    display: none;
+  }
+
+  body.invitation-page .countdown-card .time-label-short {
+    display: inline;
+  }
+
+  body.invitation-page .countdown-card .time-label {
+    font-size: clamp(0.76rem, 2.6vw, 0.9rem);
+    letter-spacing: 0.18em;
+  }
+
+  body.invitation-page .countdown-card .time-number {
+    font-size: clamp(2.2rem, 6vw, 3rem);
+  }
+
+  body.invitation-page .countdown-card .time-separator {
+    align-self: center;
+    margin-top: -20px;
+    font-size: clamp(1.8rem, 5.2vw, 3.2rem);
+    line-height: 0.9;
   }
 }
