@@ -1327,7 +1327,7 @@ body.invitation-page .cover-background::before {
     url("../assets/fotos invitacion 1/0.jpg");
   background-size: cover;
   background-position: center center;
-  filter: grayscale(1) contrast(1.03) brightness(1.08);
+  filter: none;
   transform: scale(1.03);
   z-index: 0;
 }
